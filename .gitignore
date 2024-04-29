@@ -4,6 +4,7 @@
 *.png
 *.cache
 *.pt
+runs/detect/train2
 
 
 !labels_correlogram.jpg
@@ -24,6 +25,5 @@
 !detecting.jpg
 !detecting2.jpg
 !train_imgs_with_bbox.jpg
-!best.pt
 
 
