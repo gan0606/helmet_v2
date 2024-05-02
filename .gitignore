@@ -25,5 +25,5 @@ runs/detect/train2
 !detecting.jpg
 !detecting2.jpg
 !train_imgs_with_bbox.jpg
-
+!requirements.txt
 
