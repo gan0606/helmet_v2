@@ -1,8 +1,8 @@
 import streamlit as st
 import shutil
-# import cv2
-# from PIL import Image
-# from ultralytics import YOLO
+import cv2
+from PIL import Image
+from ultralytics import YOLO
 import os
 
 # pyplotを使用する際に注記が出ないようにする文
@@ -26,11 +26,11 @@ def main():
     # 訓練済みのモデルファイル
 
     # 分類対象の画像
-    object_file = "../train_imgs_with_bbox.jpg"
+    object_file = "train_imgs_with_bbox.jpg"
     # テストデータの結果
-    result_file = "../detecting2.jpg"
+    result_file = "detecting2.jpg"
     # modelの読み込み
-    model_file = "../runs/detect/train/weights/best.pt"
+    model_file = "runs/detect/train/weights/best.pt"
 
 
     # 読み込めているかを確認

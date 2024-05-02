@@ -4,7 +4,6 @@
 *.png
 *.cache
 *.pt
-runs/detect/train2
 
 
 !labels_correlogram.jpg
