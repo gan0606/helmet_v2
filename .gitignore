@@ -4,6 +4,7 @@
 *.png
 *.cache
 *.pt
+temp.py
 
 
 !labels_correlogram.jpg
@@ -25,4 +26,6 @@
 !detecting2.jpg
 !train_imgs_with_bbox.jpg
 !requirements.txt
+!packages.txt
+!sample4_inference2.mp4
 
