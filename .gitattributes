@@ -2,3 +2,4 @@
 *.onnx filter=lfs
 *.png filter=lfs
 *.jpg filter=lfs
+sample4_inference2.mp4 filter=lfs
