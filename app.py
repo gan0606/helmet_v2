@@ -12,20 +12,19 @@ st.set_option("deprecation.showPyplotGlobalUse", False)
 def main():
     # タイトル
     st.title("YOLOv8による物体検出")
-    st.subheader("ヘルメット着用義務違反監視システム")
-    st.write("最終更新日: 2024/5/2")
+    st.subheader("ヘルメット着用促進システム ")
+    st.write("最終更新日: 2024/5/3")
 
     # サイドバーのmenu
-    menu = ["概要", "検出結果", "物体検出マシン"]
+    menu = ["イントロダクション", "検出結果・展望", "物体検出マシン"]
     # サイドバーの作成
     chosen_menu = st.sidebar.selectbox(
         "menu選択", menu
     )
 
     # ファイルの設定
-    # 訓練済みのモデルファイル
 
-    # 分類対象の画像
+    # 検出対象の画像
     object_file = "train_imgs_with_bbox.jpg"
     # テストデータの結果
     result_file = "detecting2.jpg"
@@ -48,7 +47,7 @@ def main():
 
     # menuの中身
     # 分析の概要
-    if chosen_menu == "概要":
+    if chosen_menu == "イントロダクション":
         st.subheader("開発の概要")
         st.write("YOLOv8モデルをファインチューニングして画像の中から物体を検出できるAIを開発しました。")
         st.write("YOLOv8について")
@@ -66,6 +65,10 @@ def main():
 
         """
         )
+        st.subheader("開発の目的")
+        st.write("・AIを活用したヘルメット着用自動判別システムで、作業員の安全確保と生産性向上を実現すること")
+        st.write("・ヘルメット着用自動判別システムで、現場監督の巡視時間と労力を大幅に削減すること")
+
         st.subheader("データセットの内容")
         st.write(
             """
@@ -73,7 +76,7 @@ def main():
         着用していない画像が合わせて7035枚(訓練情報: 5269枚, テスト情報: 1766枚)含まれています。
         また27039件の詳細なアノテーション情報も含まれています。
         アノテーション情報とは画像に対して付加された補足情報のことです。
-        データセットには、安全ヘルメット着用状況(helmet)と、頭部(head)、人物(person)の位置とサイズのアノテーション情報が含まれています。
+        データセットには、ヘルメットを着用した頭部(helmet)と、頭部(head)、人物(person)の位置とサイズのアノテーション情報が含まれています。
         """
         )
         st.write(
@@ -83,36 +86,43 @@ def main():
         この評価により、モデルの汎化性能を確認することができました。
             """
             )
+        st.write("Roboflowより出典 Hard Hat Workers Dataset. https://public.roboflow.com/object-detection/hard-hat-workers")
         st.write(" ")
         st.write(" ")
-        st.write("訓練情報の一部")
+        st.write("訓練情報")
         st.write("訓練画像の一部にアノテーション情報を描画しました。")
         # 画像の表示
         image_object = Image.open(object_file)
         st.image(image_object)
        
-    # 分類の結果
-    elif chosen_menu == "検出結果":
+    # 検出の結果
+    elif chosen_menu == "検出結果・展望":
         st.subheader("検出結果")
         # 結果の表示
         image_result = Image.open(result_file)
         st.image(image_result)
+        st.write(" ")
+        st.write(" ")
 
         # 結果についての説明
         st.write(
             """
-        安全ヘルメット着用検出モデルは、未知のデータにおいて、
-        人物(person)の検出精度が2%と低かった一方、ヘルメット(97%)と頭部(93%)の検出精度に関しては高い性能を発揮することを示しました。
+        開発したAIは、未知のデータにおいて、
+        人物(person)の検出精度が2%と低かった一方、
+        ヘルメット(97%)と頭部(93%)の検出精度に関しては高い性能を発揮することを示しました。
         """)
         st.write("上記の画像はテストデータのうち9枚を可視化したものです。")
-        st.write(
-            """
-        人物(person)の検出精度が低かった原因としては、helmet, headに対して訓練情報が少なかったことが考えられます。
-            """)
+        st.write("人物(person)の検出精度が低かった原因としては、helmet, headに対して訓練情報が少なかったことが考えられます。")
+        st.write(" ")
+        st.subheader("展望")
+        st.write("仮に実務でこのようなAIの開発を行う際は、モデルの学習データを増やしたり、モデルを改良したりすることで、これらの状況における検出精度向上を目指します。")
+        st.write("具体的には、下記のことを考えています。")
+        st.write("・ヘルメットを被っていない作業員が後ろを向いている時や他の作業員と重なっているときの画像や映像を追加で収集する。")
+        st.write("・helmet・head・personのデータ数を均等化する。")    
 
     elif chosen_menu == "物体検出マシン":
         st.subheader("物体検出マシン")
-        st.write("訓練したAIでアップロードされた画像の中からhead・helmet・personを検出します。")
+        st.write("訓練済みのAIでアップロードされた画像の中からhelmet・head・personを検出します。")
         # 空白行
         st.write("")
         # ラジオボタンの作成
@@ -131,7 +141,7 @@ def main():
         # img_fileが存在する場合に処理を進める
         if img_file is not None:
             # 特定の処理が行われていることを知らせる
-            with st.spinner("推定中です..."):
+            with st.spinner("検出中です..."):
                 # 画像ファイルを開く
                 img = Image.open(img_file)
                 # 画面に画像を表示
