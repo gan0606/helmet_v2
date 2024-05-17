@@ -15,7 +15,7 @@ def main():
     st.write("最終更新日: 2024/5/17")
 
     # サイドバーのmenu
-    menu = ["イントロダクション", "検出結果", "動画の物体検出", "物体検出マシン"]
+    menu = ["イントロダクション", "検出結果・展望", "動画の物体検出", "物体検出マシン"]
     # サイドバーの作成
     chosen_menu = st.sidebar.selectbox(
         "menu選択", menu
@@ -90,14 +90,14 @@ def main():
         st.write("Roboflowより出典 Hard Hat Workers Dataset. https://public.roboflow.com/object-detection/hard-hat-workers")
         st.write(" ")
         st.write(" ")
-        st.write("訓練情報")
+        st.write("**訓練情報の一部**")
         st.write("訓練画像の一部にアノテーション情報を描画しました。")
         # 画像の表示
         image_object = Image.open(object_file)
         st.image(image_object)
        
     # 検出の結果
-    elif chosen_menu == "検出結果":
+    elif chosen_menu == "検出結果・展望":
         st.subheader("検出結果")
         # 結果の表示
         image_result = Image.open(result_file)
@@ -118,6 +118,12 @@ def main():
         人物(person)の検出精度が低かった原因としては、
         helmet, headに対してpersonのアノテーション情報が少なかったことが考えられます。
             """)
+        st.write(" ")
+        st.subheader("展望")
+        st.write("仮に実務でこのようなAIの開発を行う際は、モデルの学習データを増やしたり、モデルを改良したりすることで、これらの状況における検出精度向上を目指します。")
+        st.write("具体的には、下記のことを考えています。")
+        st.write("・ヘルメットを被っていない作業員が後ろを向いている時や他の作業員と重なっているときの画像や映像を追加で収集する。")
+        st.write("・helmet・head・personのアノテーションデータの数を均等化する。") 
 
     # 動画によるデモ
     elif chosen_menu == "動画の物体検出":
