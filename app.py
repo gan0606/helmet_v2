@@ -12,7 +12,7 @@ st.set_option("deprecation.showPyplotGlobalUse", False)
 def main():
     # タイトル
     st.title("ヘルメット着用促進システムの開発")
-    st.write("最終更新日: 2024/5/17")
+    st.write("最終更新日: 2024/5/24")
 
     # サイドバーのmenu
     menu = ["概要", "検出結果・展望", "物体検出マシン"]
@@ -84,6 +84,7 @@ def main():
         5269枚の訓練情報を8:2の割合で訓練データと検証データに分割して使用しました。
             """
             )
+        st.write("Roboflowより出典 Hard Hat Workers Dataset. https://public.roboflow.com/object-detection/hard-hat-workers")
         st.write("")
         st.write("")
         st.write("**訓練情報の一部**")
@@ -104,6 +105,12 @@ def main():
             """
         安全ヘルメット着用検出モデルは、未知のデータにおいて、
         人物(person)の検出精度が2%と低かった一方、ヘルメット(97%)と頭部(93%)の検出精度に関しては高い性能を発揮することを示しました。
+        精度指標はmAPです。
+        """)
+        st.write("**mAPについて**")
+        st.write("""
+        モデルが画像内の物体をどれだけ正確に検出できているかを評価するための指標です。
+        0～1の間で表され、1に近いほど良いモデルです。
         """)
         st.write("上記の画像はテストデータのうち9枚を可視化したものです。")
         st.write(
